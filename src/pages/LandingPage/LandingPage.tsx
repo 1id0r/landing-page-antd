@@ -2,7 +2,7 @@ import { ConfigProvider, Layout, Select } from "antd";
 import { IconStarFilled } from "@tabler/icons-react";
 import "./LandingPage.css";
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 // Define interfaces
 interface FavoriteNode {
@@ -86,20 +86,6 @@ export function LandingPage() {
         </div>
         <BackgroundWidget className="bg-abstract-3" colorClass="gray" />
         <BackgroundWidget className="bg-abstract-4" colorClass="green" />
-
-        {/* Header */}
-        <Header className="header-container">
-          <div className="header-logo">לוגו</div>
-          <div className="user-profile">
-            <div className="user-name">שם מלא</div>
-            <img
-              src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=e5e7eb"
-              alt="User profile"
-              className="user-avatar"
-            />
-            <div className="help-button">?</div>
-          </div>
-        </Header>
 
         {/* Main Content */}
         <Content className="main-content">
