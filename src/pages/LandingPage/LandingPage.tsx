@@ -1,8 +1,9 @@
-import { ConfigProvider, Layout, Select } from "antd";
-import { IconStarFilled } from "@tabler/icons-react";
+import { ConfigProvider, Layout, Select, Dropdown } from "antd";
+import type { MenuProps } from "antd";
+import { IconStarFilled, IconMail, IconPhone } from "@tabler/icons-react";
 import "./LandingPage.css";
 
-const { Content } = Layout;
+const { Header, Content } = Layout;
 
 // Define interfaces
 interface FavoriteNode {
@@ -10,93 +11,107 @@ interface FavoriteNode {
   name: string;
 }
 
-// Mock Data
-const mockFavorites: FavoriteNode[] = [
+// Mock Data from "Backend"
+const backendFavorites: FavoriteNode[] = [
   { id: "1", name: "ניהול מכירות חדש" },
   { id: "2", name: "אנליטיקת נתונים" },
   { id: "3", name: "לקוחות" },
   { id: "4", name: "מעקב אחר ביצועים" },
+  { id: "5", name: "דאשבורד מכירות יומי 21/12/23" },
+  { id: "6", name: "הגדרות" },
+  { id: "7", name: "סטטוסים" },
+  { id: "8", name: "ניהול משאבים" },
+  { id: "9", name: "מעקב אחרי יעדים" },
 ];
 
-// Reusable Background Mock Widget
-const BackgroundWidget = ({
-  className,
-  colorClass,
-}: {
-  className: string;
-  colorClass?: string;
-}) => (
-  <div className={`bg-abstract ${className}`}>
-    <div className="mock-card">
+const helpMenuItems: MenuProps["items"] = [
+  {
+    key: "title",
+    label: (
       <div
-        className="card-decoration"
-        style={{ top: "8px", left: "8px", zIndex: 1, position: "relative" }}
+        style={{
+          fontSize: "15px",
+          fontWeight: 600,
+          textAlign: "right",
+          color: "#1f2937",
+        }}
       >
-        <div className="dot dot-gray"></div>
-        <div className="dot dot-blue"></div>
+        זמינים לכל שאלה
       </div>
-      <div className="mock-row">
-        <div className={`mock-item ${colorClass}`} style={{ flex: 2 }}></div>
-        <div className={`mock-item ${colorClass}`}></div>
-      </div>
-      <div className="mock-row">
-        <div className={`mock-item ${colorClass}`}></div>
-        <div className={`mock-item ${colorClass}`} style={{ flex: 3 }}></div>
-      </div>
-      <div className="mock-row">
-        <div className={`mock-item ${colorClass}`}></div>
-        <div className={`mock-item ${colorClass}`}></div>
-      </div>
-    </div>
-  </div>
-);
+    ),
+    disabled: true,
+    style: { cursor: "default", backgroundColor: "transparent" },
+  },
+  {
+    type: "divider",
+  },
+  {
+    key: "email",
+    icon: <IconMail size={18} stroke={1.5} />,
+    label: (
+      <span style={{ fontSize: "14px", color: "#1f2937" }}>
+        פרודקט CCC + Ctrl f
+      </span>
+    ),
+  },
+  {
+    key: "phone",
+    icon: <IconPhone size={18} stroke={1.5} />,
+    label: (
+      <span style={{ fontSize: "14px", color: "#1f2937" }}>#6666, 6565</span>
+    ),
+  },
+];
 
 export function LandingPage() {
+  // Logic for dynamic favorites rendering
+  const visibleFavorites = backendFavorites.slice(0, 4);
+  const hiddenFavorites = backendFavorites.slice(4);
+
+  const dynamicFavoritesItems: MenuProps["items"] = hiddenFavorites.map(
+    (fav) => ({
+      key: fav.id,
+      icon: <IconStarFilled size={16} />,
+      label: fav.name,
+    }),
+  );
+
   return (
     <ConfigProvider
       direction="rtl"
       theme={{ token: { fontFamily: "Heebo, sans-serif" } }}
     >
       <Layout className="app-container">
-        {/* Abstract Background Elements */}
-        <BackgroundWidget className="bg-abstract-1" colorClass="blue" />
-        <div className="bg-abstract bg-abstract-2">
-          <div className="mock-card">
-            <div
-              className="card-decoration"
-              style={{
-                top: "8px",
-                right: "8px",
-                position: "relative",
-                left: "auto",
-                flexDirection: "row-reverse",
-              }}
+        {/* Header */}
+        <Header className="header-container">
+          <div className="header-logo">לוגו</div>
+          <div className="user-profile">
+            <div className="user-name">שם מלא</div>
+            <img
+              src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=e5e7eb"
+              alt="User profile"
+              className="user-avatar"
+            />
+            <Dropdown
+              menu={{ items: helpMenuItems }}
+              placement="bottomRight"
+              trigger={["click", "hover"]}
             >
-              <div className="dot dot-red"></div>
-              <div className="dot dot-blue"></div>
-            </div>
-            <div className="mock-row">
-              <div className="mock-item red" style={{ height: "32px" }}></div>
-            </div>
-            <div className="mock-row">
-              <div className="mock-item red"></div>
-              <div className="mock-item red"></div>
-            </div>
+              <div className="help-button">?</div>
+            </Dropdown>
           </div>
-        </div>
-        <BackgroundWidget className="bg-abstract-3" colorClass="gray" />
-        <BackgroundWidget className="bg-abstract-4" colorClass="green" />
+        </Header>
 
         {/* Main Content */}
         <Content className="main-content">
           {/* Welcome Card */}
           <div className="welcome-card">
             {/* Left side decoration */}
-            <div className="card-decoration">
-              <div className="dot dot-gray"></div>
-              <div className="dot dot-yellow"></div>
-              <div className="dot dot-blue"></div>
-            </div>
+            <img
+              src="/main-card-deocration.svg"
+              alt="Card decoration"
+              className="card-decoration-svg"
+            />
 
             <h1 className="welcome-title">ברוך הבא למערכת פורמולה</h1>
             <p className="welcome-subtitle">
@@ -117,15 +132,24 @@ export function LandingPage() {
 
           {/* Favorites Section */}
           <div className="favorites-section">
-            <div className="favorites-title">המועדפים שלי (9)</div>
+            <div className="favorites-title">
+              המועדפים שלי ({backendFavorites.length})
+            </div>
             <div className="favorites-list">
-              {mockFavorites.map((fav) => (
+              {visibleFavorites.map((fav) => (
                 <div key={fav.id} className="favorite-tag">
                   <IconStarFilled size={16} className="tag-icon" />
                   <span>{fav.name}</span>
                 </div>
               ))}
-              <div className="tag-more">+5</div>
+              {hiddenFavorites.length > 0 && (
+                <Dropdown
+                  menu={{ items: dynamicFavoritesItems }}
+                  placement="bottomCenter"
+                >
+                  <div className="tag-more">+{hiddenFavorites.length}</div>
+                </Dropdown>
+              )}
             </div>
           </div>
         </Content>

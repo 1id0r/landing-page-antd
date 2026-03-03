@@ -3,11 +3,14 @@
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  background-color: #fafbfc;
-  /* Dotted grid background */
-  background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-color: transparent !important;
+  background-image: url('/bg-svg.svg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
 }
+
+
 
 .header-container {
   display: flex;
@@ -55,40 +58,7 @@
   font-size: 14px;
 }
 
-/* Background floating abstract elements */
-.bg-abstract {
-  position: absolute;
-  z-index: 0;
-  opacity: 0.6;
-  pointer-events: none;
-  filter: blur(2px);
-  transform: scale(0.9);
-}
 
-.bg-abstract-1 {
-  top: 10%;
-  left: 5%;
-  width: 300px;
-  border-radius: 12px;
-}
-
-.bg-abstract-2 {
-  top: 25%;
-  right: 5%;
-  width: 250px;
-}
-
-.bg-abstract-3 {
-  bottom: 10%;
-  left: 10%;
-  width: 280px;
-}
-
-.bg-abstract-4 {
-  bottom: 15%;
-  right: 15%;
-  width: 220px;
-}
 
 /* Main Content Area */
 .main-content {
@@ -114,37 +84,12 @@
   position: relative;
 }
 
-/* The small dots on the edge of the card, seen in mockup */
-.card-decoration {
+/* The SVG decoration on the edge of the card */
+.card-decoration-svg {
   position: absolute;
-  top: 24px;
-  left: -12px;
-  display: flex;
-  gap: 4px;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.dot-gray {
-  background-color: #e5e7eb;
-}
-
-.dot-yellow {
-  background-color: #fbbf24;
-}
-
-.dot-blue {
-  background-color: #3b82f6;
-  width: 16px;
-  border-radius: 4px;
-}
-
-.dot-red {
-  background-color: #ef4444;
+  top: -10px;
+  left: 24px;
+  height: 24px;
 }
 
 
@@ -221,46 +166,18 @@
 
 .tag-more {
   background: #ffffff;
-  border: 1px solid #f0f0f0;
+  border: 1px solid #1677ff;
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
-  color: #4b5563;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  color: #1677ff;
+  box-shadow: 0 1px 2px rgba(22, 119, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-/* Generic mock card components for background */
-.mock-card {
-  background: white;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.mock-row {
-  display: flex;
-  gap: 8px;
-}
-
-.mock-item {
-  height: 16px;
-  border-radius: 4px;
-  background: #f0f2f5;
-  flex: 1;
-}
-
-.mock-item.blue {
+.tag-more:hover {
   background: #e6f4ff;
-}
-
-.mock-item.red {
-  background: #fff1f0;
-}
-
-.mock-item.green {
-  background: #f6ffed;
+  border-color: #0958d9;
 }
