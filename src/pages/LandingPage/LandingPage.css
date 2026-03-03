@@ -1,0 +1,266 @@
+/* App.css */
+.app-container {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: #fafbfc;
+  /* Dotted grid background */
+  background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+.header-logo {
+  font-weight: 700;
+  font-size: 18px;
+  color: #000;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-name {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e8e8e8;
+}
+
+.help-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  cursor: pointer;
+  color: #595959;
+  font-size: 14px;
+}
+
+/* Background floating abstract elements */
+.bg-abstract {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.6;
+  pointer-events: none;
+  filter: blur(2px);
+  transform: scale(0.9);
+}
+
+.bg-abstract-1 {
+  top: 10%;
+  left: 5%;
+  width: 300px;
+  border-radius: 12px;
+}
+
+.bg-abstract-2 {
+  top: 25%;
+  right: 5%;
+  width: 250px;
+}
+
+.bg-abstract-3 {
+  bottom: 10%;
+  left: 10%;
+  width: 280px;
+}
+
+.bg-abstract-4 {
+  bottom: 15%;
+  right: 15%;
+  width: 220px;
+}
+
+/* Main Content Area */
+.main-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 120px);
+  padding: 0 20px;
+}
+
+.welcome-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  margin-bottom: 24px;
+  position: relative;
+}
+
+/* The small dots on the edge of the card, seen in mockup */
+.card-decoration {
+  position: absolute;
+  top: 24px;
+  left: -12px;
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-gray {
+  background-color: #e5e7eb;
+}
+
+.dot-yellow {
+  background-color: #fbbf24;
+}
+
+.dot-blue {
+  background-color: #3b82f6;
+  width: 16px;
+  border-radius: 4px;
+}
+
+.dot-red {
+  background-color: #ef4444;
+}
+
+
+.welcome-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.welcome-subtitle {
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dashboard-select {
+  width: 100%;
+}
+
+.dashboard-select .ant-select-selector {
+  border-radius: 8px !important;
+  height: 44px !important;
+  align-items: center;
+}
+
+/* Favorites Section */
+.favorites-section {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.favorites-title {
+  font-size: 13px;
+  color: #8c8c8c;
+  margin-bottom: 16px;
+}
+
+.favorites-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.favorite-tag {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #4b5563;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.favorite-tag:hover {
+  border-color: #d9d9d9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.tag-icon {
+  color: #1f2937;
+}
+
+.tag-more {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* Generic mock card components for background */
+.mock-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mock-row {
+  display: flex;
+  gap: 8px;
+}
+
+.mock-item {
+  height: 16px;
+  border-radius: 4px;
+  background: #f0f2f5;
+  flex: 1;
+}
+
+.mock-item.blue {
+  background: #e6f4ff;
+}
+
+.mock-item.red {
+  background: #fff1f0;
+}
+
+.mock-item.green {
+  background: #f6ffed;
+}
