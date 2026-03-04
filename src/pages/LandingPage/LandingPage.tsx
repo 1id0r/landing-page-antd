@@ -1,4 +1,4 @@
-import { ConfigProvider, Layout, Select, Dropdown } from "antd";
+import { Layout, Select, Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import { IconStarFilled, IconMail, IconPhone } from "@tabler/icons-react";
 import "./LandingPage.css";
@@ -33,7 +33,6 @@ const helpMenuItems: MenuProps["items"] = [
           fontSize: "15px",
           fontWeight: 600,
           textAlign: "right",
-          color: "#1f2937",
         }}
       >
         זמינים לכל שאלה
@@ -49,7 +48,7 @@ const helpMenuItems: MenuProps["items"] = [
     key: "email",
     icon: <IconMail size={18} stroke={1.5} />,
     label: (
-      <span style={{ fontSize: "14px", color: "#1f2937" }}>
+      <span style={{ fontSize: "14px" }}>
         פרודקט CCC + Ctrl f
       </span>
     ),
@@ -58,7 +57,7 @@ const helpMenuItems: MenuProps["items"] = [
     key: "phone",
     icon: <IconPhone size={18} stroke={1.5} />,
     label: (
-      <span style={{ fontSize: "14px", color: "#1f2937" }}>#6666, 6565</span>
+      <span style={{ fontSize: "14px" }}>#6666, 6565</span>
     ),
   },
 ];
@@ -77,83 +76,78 @@ export function LandingPage() {
   );
 
   return (
-    <ConfigProvider
-      direction="rtl"
-      theme={{ token: { fontFamily: "Heebo, sans-serif" } }}
-    >
-      <Layout className="app-container">
-        {/* Header */}
-        <Header className="header-container">
-          <div className="header-logo">לוגו</div>
-          <div className="user-profile">
-            <div className="user-name">שם מלא</div>
-            <img
-              src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=e5e7eb"
-              alt="User profile"
-              className="user-avatar"
-            />
-            <Dropdown
-              menu={{ items: helpMenuItems }}
-              placement="bottomRight"
-              trigger={["click", "hover"]}
-            >
-              <div className="help-button">?</div>
-            </Dropdown>
+    <Layout className="app-container">
+      {/* Header */}
+      <Header className="header-container">
+        <div className="header-logo">לוגו</div>
+        <div className="user-profile">
+          <div className="user-name">שם מלא</div>
+          <img
+            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=e5e7eb"
+            alt="User profile"
+            className="user-avatar"
+          />
+          <Dropdown
+            menu={{ items: helpMenuItems }}
+            placement="bottomRight"
+            trigger={["click", "hover"]}
+          >
+            <div className="help-button">?</div>
+          </Dropdown>
+        </div>
+      </Header>
+
+      {/* Main Content */}
+      <Content className="main-content">
+        {/* Welcome Card */}
+        <div className="welcome-card">
+          {/* Left side decoration */}
+          <img
+            src="/main-card-deocration.svg"
+            alt="Card decoration"
+            className="card-decoration-svg"
+          />
+
+          <h1 className="welcome-title">ברוך הבא למערכת פורמולה</h1>
+          <p className="welcome-subtitle">
+            מערכת לטובת החזקה, בנייה ושיקוף תמונת מצב של מערכות, מסלולים
+            וחטיפים לטובת תפעול ואחיזה מירביים של הכשירות
+          </p>
+
+          <Select
+            className="dashboard-select"
+            placeholder="בחר דאשבורד קיים"
+            options={[
+              { value: "dash1", label: "דאשבורד מנהלים" },
+              { value: "dash2", label: "מצב מערכות מרכזי" },
+            ]}
+            allowClear
+          />
+        </div>
+
+        {/* Favorites Section */}
+        <div className="favorites-section">
+          <div className="favorites-title">
+            המועדפים שלי ({backendFavorites.length})
           </div>
-        </Header>
-
-        {/* Main Content */}
-        <Content className="main-content">
-          {/* Welcome Card */}
-          <div className="welcome-card">
-            {/* Left side decoration */}
-            <img
-              src="/main-card-deocration.svg"
-              alt="Card decoration"
-              className="card-decoration-svg"
-            />
-
-            <h1 className="welcome-title">ברוך הבא למערכת פורמולה</h1>
-            <p className="welcome-subtitle">
-              מערכת לטובת החזקה, בנייה ושיקוף תמונת מצב של מערכות, מסלולים
-              וחטיפים לטובת תפעול ואחיזה מירביים של הכשירות
-            </p>
-
-            <Select
-              className="dashboard-select"
-              placeholder="בחר דאשבורד קיים"
-              options={[
-                { value: "dash1", label: "דאשבורד מנהלים" },
-                { value: "dash2", label: "מצב מערכות מרכזי" },
-              ]}
-              allowClear
-            />
+          <div className="favorites-list">
+            {visibleFavorites.map((fav) => (
+              <div key={fav.id} className="favorite-tag">
+                <IconStarFilled size={16} className="tag-icon" />
+                <span>{fav.name}</span>
+              </div>
+            ))}
+            {hiddenFavorites.length > 0 && (
+              <Dropdown
+                menu={{ items: dynamicFavoritesItems }}
+                placement="bottomCenter"
+              >
+                <div className="tag-more">+{hiddenFavorites.length}</div>
+              </Dropdown>
+            )}
           </div>
-
-          {/* Favorites Section */}
-          <div className="favorites-section">
-            <div className="favorites-title">
-              המועדפים שלי ({backendFavorites.length})
-            </div>
-            <div className="favorites-list">
-              {visibleFavorites.map((fav) => (
-                <div key={fav.id} className="favorite-tag">
-                  <IconStarFilled size={16} className="tag-icon" />
-                  <span>{fav.name}</span>
-                </div>
-              ))}
-              {hiddenFavorites.length > 0 && (
-                <Dropdown
-                  menu={{ items: dynamicFavoritesItems }}
-                  placement="bottomCenter"
-                >
-                  <div className="tag-more">+{hiddenFavorites.length}</div>
-                </Dropdown>
-              )}
-            </div>
-          </div>
-        </Content>
-      </Layout>
-    </ConfigProvider>
+        </div>
+      </Content>
+    </Layout>
   );
 }
