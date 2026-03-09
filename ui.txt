@@ -1,0 +1,146 @@
+Frontend Architecture Guide
+
+Stack: Vite + React + TanStack Query (React Query) + Zustand
+
+Purpose: Provide a scalable and maintainable project structure for a production-level frontend application.
+
+Project Folder Structure
+
+src/
+│
+├── app/
+│   ├── providers/
+│   │   ├── QueryProvider.tsx
+│   │   └── StoreProvider.tsx
+│   ├── router/
+│   │   └── router.tsx
+│   └── App.tsx
+│
+├── features/
+│   ├── auth/
+│   │   ├── api/
+│   │   │   └── login.api.ts
+│   │   ├── hooks/
+│   │   │   └── useLogin.ts
+│   │   ├── store/
+│   │   │   └── auth.store.ts
+│   │   ├── components/
+│   │   │   └── LoginForm.tsx
+│   │   └── types.ts
+│   │
+│   ├── users/
+│   │   ├── api/
+│   │   ├── hooks/
+│   │   ├── components/
+│   │   └── types.ts
+│   │
+│   └── orders/
+│
+├── shared/
+│   ├── components/
+│   │   ├── Button/
+│   │   └── Modal/
+│   ├── hooks/
+│   ├── utils/
+│   └── types/
+│
+├── lib/
+│   ├── api/
+│   │   └── axios.ts
+│   ├── react-query/
+│   │   ├── queryClient.ts
+│   │   └── queryKeys.ts
+│   ├── zustand/
+│   │   └── createStore.ts
+│   └── config/
+│       └── env.ts
+│
+├── pages/
+│   ├── LoginPage.tsx
+│   └── DashboardPage.tsx
+│
+├── assets/
+├── styles/
+└── main.tsx
+
+Architecture Explanation
+app/
+Contains global application configuration such as providers, routing setup, and the root application component.
+
+app/providers
+All global providers such as React Query Provider, global state providers, and context providers.
+
+app/router
+Defines the routing configuration of the application using React Router or another routing solution.
+
+features/
+Contains all business features of the application. Each feature is isolated and contains everything related to that specific domain.
+
+features/auth
+Handles authentication logic including login API calls, hooks, authentication state, and UI components.
+
+features/users
+Contains user-related functionality such as user lists, profile management, and user data fetching.
+
+features/orders
+Handles order management including fetching orders, order UI components, and business logic.
+
+shared/
+Contains reusable UI and utility elements used across many features.
+
+shared/components
+Reusable UI components such as buttons, modals, loaders, inputs and other design-system components.
+
+shared/hooks
+Reusable hooks that are not tied to a specific feature.
+
+shared/utils
+Utility helper functions such as formatters, validators, and small helper utilities.
+
+shared/types
+Shared TypeScript types used across the application.
+
+lib/
+Contains global technical infrastructure code. Unlike shared, which focuses on UI reuse, lib contains integrations with external libraries and system-level utilities.
+
+lib/api
+Defines the global API client configuration such as Axios instance, interceptors, and base API settings.
+
+lib/react-query
+Contains React Query infrastructure such as the global QueryClient configuration and query key factory utilities.
+
+lib/zustand
+Contains helpers and base configurations used to create Zustand stores consistently across the application.
+
+lib/config
+Application configuration utilities such as environment variable loaders, runtime configuration, and global constants.
+
+pages/
+Represents top-level route pages. Pages usually compose multiple features together.
+
+assets/
+Contains static assets such as images, icons, and fonts.
+
+styles/
+Global styles, CSS variables, design tokens, and styling configuration.
+
+main.tsx
+Application entry point where React renders the root component and global providers are initialized.
+
+State Management Strategy
+React Query is used for server state such as API data, caching, and synchronization with the backend. Zustand is used for client-side state such as UI state, authentication session data, theme settings, and other global states that are not fetched from the server.
+
+Key Architecture Principles
+Use feature-based architecture to keep related logic together.
+
+Keep UI components separate from business logic and API communication.
+
+Use React Query for all server data fetching and caching.
+
+Use Zustand for lightweight client-side state management.
+
+Separate technical infrastructure (lib) from reusable UI/shared code.
+
+Avoid tight coupling between features.
+
+Keep shared code in the shared directory to promote reuse.
